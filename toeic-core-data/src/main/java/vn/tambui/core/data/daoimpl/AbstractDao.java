@@ -10,7 +10,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static vn.tambui.core.common.constant.CoreConstant.SORT_ASC;
+
 
 public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID,T> {
     //B1: OpenSession

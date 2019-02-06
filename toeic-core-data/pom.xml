@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>vn.tambui</groupId>
-            <artifactId>toeic--core--common</artifactId>
+            <artifactId>toeic-core-common</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
