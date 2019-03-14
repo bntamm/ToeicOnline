@@ -1,16 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Tam
-  Date: 2/7/2019
-  Time: 11:36 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="/common/taglib.jsp"%>
 <html>
 <head>
-    <title>Title</title>
+    <title><dec:title default="Admin Page"/> </title>
+    <dec:head/>
 </head>
-<body>
-
-</body>
+    <body>
+            //import header
+            <%@include file="/common/admin/header.jsp"%>
+            //import menu
+            <%@include file="/common/admin/menu.jsp"%>
+            //import body
+            <dec:body/>
+            //import footer
+            <%@include file="/common/admin/footer.jsp"%>
+    </body>
 </html>

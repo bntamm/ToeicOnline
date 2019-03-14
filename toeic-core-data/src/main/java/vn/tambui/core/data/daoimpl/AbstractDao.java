@@ -18,7 +18,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID,T>
 //        return HibernateUtil.getSessionFactory().openSession();
 //    }
 
-    //B2: tạo 1 metyhod để get tên Class Entity để truyền vào <T>
+    //B2: tạo 1 method để get tên Class Entity để truyền vào <T>
     private Class<T> persistenceClass;
     //tao constructor cho AbstractDao
     public AbstractDao(){
