@@ -3,6 +3,9 @@ package vn.tambui.controller.admin;
 import org.apache.log4j.Logger;
 import vn.tambui.command.UserCommand;
 import vn.tambui.core.dto.UserDTO;
+import vn.tambui.core.service.UserService;
+import vn.tambui.core.service.impl.UserServiceImpl;
+import vn.tambui.core.web.common.WebConstant;
 import vn.tambui.core.web.utils.FormUtil;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,13 +28,33 @@ public class LoginController  extends HttpServlet{
 
         protected void doPost(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
-//            String name = request.getParameter("name");
-//            String password = request.getParameter("password");
 
-//            UserCommand command = FormUtil.populate(UserCommand.class, request);
-//            UserDTO pojo = command.getPojo();
+            UserCommand command = FormUtil.populate(UserCommand.class, request);
+            UserDTO pojo = command.getPojo();
+            UserService userService = new UserServiceImpl();
 
-            RequestDispatcher rd = request.getRequestDispatcher("view/admin/home.jsp");
+            try {
+                if(userService.isUserExist(pojo) != null){
+                    if(userService.findRoleByUser(pojo) != null && userService.findRoleByUser(pojo).getRoleDTO() != null){
+                        if(userService.findRoleByUser(pojo).getRoleDTO().getName().equals(WebConstant.ROLE_ADMIN) ){
+
+                            request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_SUCCESS);
+                            request.setAttribute(WebConstant.MESSAGE_REPONSE, "ADMIN");
+
+                        }else if(userService.findRoleByUser(pojo).getRoleDTO().getName().equals(WebConstant.ROLE_USER) ){
+
+                            request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_SUCCESS);
+                            request.setAttribute(WebConstant.MESSAGE_REPONSE, "USER");
+                        }
+                    }
+                }
+            }catch(NullPointerException e){
+                log.error(e.getMessage(), e);
+                request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_ERROR);
+                request.setAttribute(WebConstant.MESSAGE_REPONSE, "Name or Password is wrong!");
+            }
+
+        RequestDispatcher rd = request.getRequestDispatcher("views/web/login.jsp");
         rd.forward(request,response);
         }
     }
