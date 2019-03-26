@@ -38,13 +38,14 @@ public class LoginController  extends HttpServlet{
                     if(userService.findRoleByUser(pojo) != null && userService.findRoleByUser(pojo).getRoleDTO() != null){
                         if(userService.findRoleByUser(pojo).getRoleDTO().getName().equals(WebConstant.ROLE_ADMIN) ){
 
-                            request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_SUCCESS);
-                            request.setAttribute(WebConstant.MESSAGE_REPONSE, "ADMIN");
+                            //khi đăng nhập nếu user là Admin thì SendRedirect tới page admin
+                            response.sendRedirect("/admin.html");
 
                         }else if(userService.findRoleByUser(pojo).getRoleDTO().getName().equals(WebConstant.ROLE_USER) ){
 
-                            request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_SUCCESS);
-                            request.setAttribute(WebConstant.MESSAGE_REPONSE, "USER");
+                            //khi đăng nhập nếu user là User thì SendRedirect tới page Web
+                            response.sendRedirect("/web.html");
+
                         }
                     }
                 }
@@ -52,10 +53,11 @@ public class LoginController  extends HttpServlet{
                 log.error(e.getMessage(), e);
                 request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_ERROR);
                 request.setAttribute(WebConstant.MESSAGE_REPONSE, "Name or Password is wrong!");
+                RequestDispatcher rd = request.getRequestDispatcher("views/web/login.jsp");
+                rd.forward(request,response);
             }
 
-        RequestDispatcher rd = request.getRequestDispatcher("views/web/login.jsp");
-        rd.forward(request,response);
+
         }
     }
 
