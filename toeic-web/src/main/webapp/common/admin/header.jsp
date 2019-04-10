@@ -7,10 +7,10 @@
 <div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a href="#" class="navbar-brand">
+            <a href="/admin.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                    Trang quản trị
+                    <fmt:message key="label.admin.management" bundle="${lang}"/>
                 </small>
             </a>
         </div>
@@ -18,20 +18,19 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        Welcome
-                        <%--Welcome, ${login_name}--%>
+                        Welcome, ${login_name}
 
                     </a>
                 <li class="light-blue dropdown-modal">
                     <%--<c:url var="logoutUrl" value="/logout.html">--%>
-                        <c:url var="logoutUrl" value="#">
+                        <c:url var="logoutUrl" value="/login.html">
                         <c:param name="action" value="logout"/>
                     </c:url>
                     <a href="${logoutUrl}">
                         <%--<a href="#">--%>
                         <i class="ace-icon fa fa-power-off"></i>
-                        <%--<fmt:message key="label.logout" bundle="${lang}"/>--%>
-                        Thoát
+                        <fmt:message key="label.logout" bundle="${lang}"/>
+
                     </a>
                 </li>
                 </li>
